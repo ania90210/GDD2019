@@ -7,6 +7,7 @@ public class GameManager1 : MonoBehaviour
     public static GameManager1 instance = null;
 
 	public BoardManager boardScript;
+	public PlayerStorage storage;
 	
 	private int level = 3;
 	
@@ -21,8 +22,12 @@ public class GameManager1 : MonoBehaviour
         //Sets this to not be destroyed when reloading scene
 		DontDestroyOnLoad (gameObject);
 
+		// Get a reference to the board and set it up
 		boardScript = GetComponent<BoardManager>();
 		InitGame (); 
+
+		// Create a player storage to keep track of collectables
+		storage = new PlayerStorage();
 	}
 	
     //Initializes the game for each level
