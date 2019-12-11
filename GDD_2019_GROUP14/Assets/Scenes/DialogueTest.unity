@@ -492,7 +492,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Popup text
 --- !u!222 &1571226324
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -540,8 +540,543 @@ MonoBehaviour:
   currentDialogue:
     data: {fileID: 0}
     currentPage:
-      header: 
-      body: 
+      pageType: 0
+      infoPage:
+        pageType: 0
+        infoPage:
+          pageType: 0
+          infoPage:
+            pageType: 0
+            infoPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+            questionPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+              option: []
+            header: 
+            body: 
+          questionPage:
+            pageType: 0
+            infoPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+            questionPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+              option: []
+            header: 
+            body: 
+            option: []
+          header: 
+          body: 
+        questionPage:
+          pageType: 0
+          infoPage:
+            pageType: 0
+            infoPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+            questionPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+              option: []
+            header: 
+            body: 
+          questionPage:
+            pageType: 0
+            infoPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+            questionPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+              option: []
+            header: 
+            body: 
+            option: []
+          header: 
+          body: 
+          option: []
+        header: 
+        body: 
+      questionPage:
+        pageType: 0
+        infoPage:
+          pageType: 0
+          infoPage:
+            pageType: 0
+            infoPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+            questionPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+              option: []
+            header: 
+            body: 
+          questionPage:
+            pageType: 0
+            infoPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+            questionPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+              option: []
+            header: 
+            body: 
+            option: []
+          header: 
+          body: 
+        questionPage:
+          pageType: 0
+          infoPage:
+            pageType: 0
+            infoPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+            questionPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+              option: []
+            header: 
+            body: 
+          questionPage:
+            pageType: 0
+            infoPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+            questionPage:
+              pageType: 0
+              infoPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+              questionPage:
+                pageType: 0
+                infoPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                questionPage:
+                  pageType: 0
+                  header: 
+                  body: 
+                header: 
+                body: 
+                option: []
+              header: 
+              body: 
+              option: []
+            header: 
+            body: 
+            option: []
+          header: 
+          body: 
+          option: []
+        header: 
+        body: 
+        option: []
+    reachedEnd: 0
     dialogueView: {fileID: 0}
     pageView: {fileID: 0}
 --- !u!4 &1871134025
