@@ -15,11 +15,11 @@ public class TrashBin : MonoBehaviour
     /// <summary>
     /// This event is triggered when the maxAmt of trash is reached
     /// </summary>
-    public event UnityAction OnFilled;
+    public UnityEvent OnFilled;
     /// <summary>
     /// Whether the OnFilled event was called yet or not
     /// </summary>
-    public bool flag_OnFilled;
+    private bool isDone_OnFilled;
     
     /// <summary>
     /// This function tries to throw trash into the bin
@@ -27,6 +27,8 @@ public class TrashBin : MonoBehaviour
     /// <param name="amt"></param>
     /// <returns></returns>
     public int TryThrowInto(int amt) {
+        if (isDone_OnFilled) return 0;
+        
         // Add the amount of trash we are trying to throw into the trash bin's current amount of trash
         currentAmt += amt;
 
@@ -39,7 +41,7 @@ public class TrashBin : MonoBehaviour
 
         // check if the bin is full and call the OnFilled event
         if (currentAmt == maxAmt) {
-            OnFilled.Invoke();
+            if (OnFilled != null) OnFilled.Invoke();
         }
 
         // return the amount of leftovers if there are some

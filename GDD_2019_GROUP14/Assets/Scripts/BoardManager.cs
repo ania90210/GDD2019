@@ -34,11 +34,22 @@ public class BoardManager : MonoBehaviour
     public GameObject[] trashTiles;									//Array of trash prefabs.
     public GameObject[] enemyTiles;									//Array of enemy prefabs.
     public GameObject[] outerWallTiles;								//Array of outer tile prefabs.
+
+    public Artifact[] artifacts;                                    //List of all Artifacts
+    public Dictionary<string,Artifact> artifactLookup;              //Dictionary of an artifact lookup table
     
     private Transform boardHolder;									//to store a reference to the transform of Board object.
     private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
     
     
+    void Start() {
+
+        // Store the list of artifacts into the dictionary so we can look them up using its label
+        foreach (Artifact artifact in artifacts) {
+            artifactLookup.Add(artifact.label, artifact);
+        }
+    }
+
     //Clears list gridPositions and prepares it to generate a new board.
     void InitialiseList ()
     {
@@ -151,5 +162,9 @@ public class BoardManager : MonoBehaviour
 
         //Instantiate the trash bins somewhere on the map
         Instantiate(trashBin, RandomPosition(), Quaternion.identity);
+
+        //Instantiate the artifact for this level
+        int artifactIdx = 0;    //tmporary, keep track of this globally instead
+        GameManager1.instance.currentArtifact = Instantiate(artifacts[artifactIdx], RandomPosition(), Quaternion.identity);
     }
 }

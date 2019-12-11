@@ -27,19 +27,14 @@ public class PlayerCollector : MonoBehaviour {
     }
 
     void Awake() {
+        stateMachine = gameObject.AddComponent<StateMachine>();
         DontDestroyOnLoad(this.gameObject);
-    }
-
-    void Start() {
-        stateMachine = new StateMachine();
     }
 
     void Update() {
         stateMachine.ExecuteStateUpdate();
 
     }
-
-    void hello() {}
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -51,26 +46,24 @@ public class PlayerCollector : MonoBehaviour {
                 CollectTrash(collider.gameObject);
             }));
         }
+
+        // If collided with a trash bin, attempt to toss out the trash
+        TrashBin trashBin = collider.gameObject.GetComponent<TrashBin>();
+        if (trashBin != null) {
+            // Get the total trash
+            int trashCnt = GameManager1.instance.storage.trashCollected;
+            
+            // Wait for input for this event
+            stateMachine.ChangeState(new WaitForInput("Throw Trash", true, inputBtn, delegate {
+                // throw into bin and store leftover trash back in storage
+                GameManager1.instance.storage.trashCollected = trashBin.TryThrowInto(trashCnt);
+            }));            
+        }
     }
 
     void OnTriggerExit2D(Collider2D collider)
     {
         stateMachine.ChangeState(null);
-    }
-
-    void OnColliderEnter2D(Collision collisionInfo) {
-        
-        // If collided with a trash bin, attempt to toss out the trash
-        TrashBin trashBin = collisionInfo.gameObject.GetComponent<TrashBin>();
-        if (trashBin != null) {
-            // Get the total trash
-            int trashCnt = GameManager1.instance.storage.trashCollected;
-            
-            // throw into bin and store leftover trash back in storage
-            stateMachine.ChangeState(new WaitForInput("Throw Trash", true, inputBtn, delegate {
-                GameManager1.instance.storage.trashCollected = trashBin.TryThrowInto(trashCnt);
-            }));            
-        }
     }
 
 }

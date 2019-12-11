@@ -8,6 +8,7 @@ public class WaitForInput : IState
 {
     public string label {get; set;}
     public bool executeOnce {get; set;}
+    private bool _executed;
 
 
     /// <summary>
@@ -29,13 +30,17 @@ public class WaitForInput : IState
     }
 
     public void Execute() {
+        // if the state is to be executed only once and it already has, then return
+        if (executeOnce && _executed) return;
+
         if (Input.GetKey(inputBtn)) {
-            executeOnce = true;
             onInputTrigger();
+            _executed = true;
         }
     }
 
     public void Exit() {
-        executeOnce = false;
+        // on exit, reset the executed flag in case we reuse this instance of the state
+        _executed = false;
     }
 }

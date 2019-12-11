@@ -8,6 +8,7 @@ public class GameManager1 : MonoBehaviour
 
 	public BoardManager boardScript;
 	public PlayerStorage storage;
+	public Artifact currentArtifact;
 	
 	private int level = 3;
 	
