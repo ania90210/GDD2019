@@ -5,7 +5,13 @@ using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
-
+    private static DialogueSystem _instance;
+    public static DialogueSystem instance {
+        get {
+            return instance;
+        }
+    }
+    public Canvas canvasPrefab;
     public Canvas canvas;
     public DialogueView dialoguePrefab;
     public PageView pagePrefab;
@@ -17,6 +23,7 @@ public class DialogueSystem : MonoBehaviour
     public Dialogue currentDialogue;
 
     void Start() {
+        if (_instance == null) _instance = this;
 
         // Add dialogues to the dictionary
         foreach (DialogueData dialogue in dialogues) {
@@ -25,6 +32,8 @@ public class DialogueSystem : MonoBehaviour
     }
 
     public void BeginDialogue(string id) {
+        canvas = Instantiate(canvasPrefab);
+
         DialogueData dialogueData = dialogueLookup[id];
         if (dialogueData == null) {
             Debug.LogError("The requested dialogue, '" + id + "'  doesn't exist.");
@@ -71,6 +80,7 @@ public class DialogueSystem : MonoBehaviour
         Destroy(currentDialogue.dialogueView.gameObject);
 
         currentDialogue = null;
+        Destroy(canvas.gameObject);
     }
 }
 

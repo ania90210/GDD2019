@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager1 : MonoBehaviour
 {
@@ -8,7 +9,12 @@ public class GameManager1 : MonoBehaviour
 
 	public BoardManager boardScript;
 	public PlayerStorage storage;
-	public Artifact currentArtifact;
+	public GameObject artifactPrefab;
+	[HideInInspector] public GameObject artifact;
+	public TrashBin trashBinPrefab;
+	[HideInInspector] public TrashBin trashBin;
+
+	public GameManagerView view;
 	
 	private int level = 3;
 	
@@ -34,11 +40,29 @@ public class GameManager1 : MonoBehaviour
     //Initializes the game for each level
 	void InitGame() {
 		boardScript.SetupScene(level);
+
+		// Place the trashbin somewhere on the board
+		trashBin = boardScript.PlaceObjectRandom(trashBinPrefab.gameObject).GetComponent<TrashBin>();
+		trashBin.OnFilled.AddListener(delegate {
+			artifact.SetActive(true);
+			DialogueSystem.instance.BeginDialogue("clock_tower");
+		});
+		trashBin.OnReceivedTrash.AddListener(delegate {
+			view.trashCountText.text = trashBin.currentAmt.ToString();
+		});
+
+		// Place the artifact somewhere on the board
+		artifact = boardScript.PlaceObjectRandom(artifactPrefab.gameObject);
+		// At the start, the artifact is invisble to the player
+		artifact.gameObject.SetActive(false);
+
+
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
 
+[System.Serializable]
+public class GameManagerView {
+	public Text trashCountText;
+
+}

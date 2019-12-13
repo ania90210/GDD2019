@@ -26,29 +26,17 @@ public class BoardManager : MonoBehaviour
     public int rows = 16;	                                        //Number of rows in game board.
     //16 by 16 game board											
     public Count wallCount = new Count (9, 17);						//Lower and upper limit for random number of walls per level.
-    public Count trashCount = new Count (1, 5);						//Lower and upper limit for random number of trash items per level.
+    public Count trashCount = new Count (5, 10);						//Lower and upper limit for random number of trash items per level.
     public GameObject exit;											//Prefab to spawn for exit.
-    public GameObject trashBin;                                     //Prefab to throw trash into.
     public GameObject[] floorTiles;									//Array of floor prefabs.
     public GameObject[] wallTiles;									//Array of wall prefabs.
     public GameObject[] trashTiles;									//Array of trash prefabs.
     public GameObject[] enemyTiles;									//Array of enemy prefabs.
     public GameObject[] outerWallTiles;								//Array of outer tile prefabs.
-
-    public Artifact[] artifacts;                                    //List of all Artifacts
-    public Dictionary<string,Artifact> artifactLookup;              //Dictionary of an artifact lookup table
     
     private Transform boardHolder;									//to store a reference to the transform of Board object.
     private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
     
-    
-    void Start() {
-
-        // Store the list of artifacts into the dictionary so we can look them up using its label
-        foreach (Artifact artifact in artifacts) {
-            artifactLookup.Add(artifact.label, artifact);
-        }
-    }
 
     //Clears list gridPositions and prepares it to generate a new board.
     void InitialiseList ()
@@ -159,12 +147,10 @@ public class BoardManager : MonoBehaviour
         
         //Instantiate the exit tile in the upper right hand corner
         Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
+    }
 
-        //Instantiate the trash bins somewhere on the map
-        Instantiate(trashBin, RandomPosition(), Quaternion.identity);
-
-        //Instantiate the artifact for this level
-        int artifactIdx = 0;    //tmporary, keep track of this globally instead
-        GameManager1.instance.currentArtifact = Instantiate(artifacts[artifactIdx], RandomPosition(), Quaternion.identity);
+    public GameObject PlaceObjectRandom(GameObject prefab) {
+        GameObject newObj = Instantiate(prefab, RandomPosition(), Quaternion.identity);
+        return newObj;
     }
 }

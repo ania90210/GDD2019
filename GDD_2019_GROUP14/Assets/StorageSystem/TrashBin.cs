@@ -12,6 +12,10 @@ public class TrashBin : MonoBehaviour
     public int currentAmt;
     public int maxAmt = 5;
 
+    public SpriteRenderer capacityIndicator;
+
+    public UnityEvent OnReceivedTrash;
+
     /// <summary>
     /// This event is triggered when the maxAmt of trash is reached
     /// </summary>
@@ -21,6 +25,24 @@ public class TrashBin : MonoBehaviour
     /// </summary>
     private bool isDone_OnFilled;
     
+
+    void Start() {
+        OnReceivedTrash.AddListener(UpdateIndicatorLights);
+
+        UpdateIndicatorLights();
+    }
+
+    public void UpdateIndicatorLights() {
+        if (currentAmt == 0) {
+            capacityIndicator.color = Color.red;
+        }
+        else if (currentAmt >= maxAmt) {
+            capacityIndicator.color = Color.green;
+        } else {
+            capacityIndicator.color = Color.yellow;
+        }
+    }
+
     /// <summary>
     /// This function tries to throw trash into the bin
     /// </summary>
@@ -43,6 +65,9 @@ public class TrashBin : MonoBehaviour
         if (currentAmt == maxAmt) {
             if (OnFilled != null) OnFilled.Invoke();
         }
+
+        // Call any other events when a trash is received
+        if (OnReceivedTrash != null) OnReceivedTrash.Invoke();
 
         // return the amount of leftovers if there are some
         return leftover;
