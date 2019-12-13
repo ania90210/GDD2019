@@ -8,7 +8,7 @@ public class DialogueSystem : MonoBehaviour
     private static DialogueSystem _instance;
     public static DialogueSystem instance {
         get {
-            return instance;
+            return _instance;
         }
     }
     public Canvas canvasPrefab;
@@ -22,6 +22,11 @@ public class DialogueSystem : MonoBehaviour
 
     public Dialogue currentDialogue;
 
+    /// <summary>
+    /// Seconds to wait before beginning the dialogue
+    /// </summary>
+    public float startDelay;
+
     void Start() {
         if (_instance == null) _instance = this;
 
@@ -32,36 +37,68 @@ public class DialogueSystem : MonoBehaviour
     }
 
     public void BeginDialogue(string id) {
-        canvas = Instantiate(canvasPrefab);
-
         DialogueData dialogueData = dialogueLookup[id];
         if (dialogueData == null) {
             Debug.LogError("The requested dialogue, '" + id + "'  doesn't exist.");
         }
 
+        canvas = Instantiate(canvasPrefab);
+
         // Create a new dialogue object and pass in the data
         currentDialogue = new Dialogue(dialogueData);
-        PageData page = currentDialogue.Begin();
+        InfoPageData page = currentDialogue.Begin();
 
         // Update GUI
         currentDialogue.dialogueView = Instantiate(dialoguePrefab, canvas.transform);
+
+        // 12/13/2019 TODO this is not working currently. I can't move to the next page
         currentDialogue.dialogueView.nextPage.onClick.AddListener( delegate {
+            Debug.Log("next page is called");
             NextPage(currentDialogue);
         });
 
-        if (page is InfoPage) {
 
-        }
         currentDialogue.pageView = Instantiate(pagePrefab, currentDialogue.dialogueView.panel.transform);
         // currentDialogue.pageView.SetHeader(page.header);
-        // currentDialogue.pageView.SetBody(page.body); 
+        currentDialogue.pageView.SetBody(page.body);
+
+//        StartCoroutine(IEBeginDialogue(id));
+    }
+
+    IEnumerator IEBeginDialogue(string id) {
+        DialogueData dialogueData = dialogueLookup[id];
+        if (dialogueData == null) {
+            Debug.LogError("The requested dialogue, '" + id + "'  doesn't exist.");
+        }
+
+        yield return new WaitForSeconds(startDelay);
+
+        canvas = Instantiate(canvasPrefab);
+
+        // Create a new dialogue object and pass in the data
+        currentDialogue = new Dialogue(dialogueData);
+        InfoPageData page = currentDialogue.Begin();
+
+        // Update GUI
+        currentDialogue.dialogueView = Instantiate(dialoguePrefab, canvas.transform);
+
+        // 12/13/2019 TODO this is not working currently. I can't move to the next page
+        currentDialogue.dialogueView.nextPage.onClick.AddListener( delegate {
+            Debug.Log("next page is called");
+            NextPage(currentDialogue);
+        });
+
+
+        currentDialogue.pageView = Instantiate(pagePrefab, currentDialogue.dialogueView.panel.transform);
+        // currentDialogue.pageView.SetHeader(page.header);
+        currentDialogue.pageView.SetBody(page.body); 
     }
 
     public void NextPage(Dialogue dialogue) {
         if (dialogue == null) return;
 
         // Get the next page data
-        PageData page = dialogue.NextPage();
+        InfoPageData page = dialogue.NextPage();
         if (page == null) {
             CloseDialogue();
         };
@@ -70,7 +107,7 @@ public class DialogueSystem : MonoBehaviour
         Destroy(dialogue.pageView.gameObject);
         dialogue.pageView = Instantiate(pagePrefab, dialogue.dialogueView.panel.transform);
         // dialogue.pageView.SetHeader(page.header);
-        // dialogue.pageView.SetBody(page.body); 
+        dialogue.pageView.SetBody(page.body); 
     }
 
     public void CloseDialogue() {
@@ -81,6 +118,8 @@ public class DialogueSystem : MonoBehaviour
 
         currentDialogue = null;
         Destroy(canvas.gameObject);
+
+        
     }
 }
 
@@ -90,7 +129,7 @@ public class Dialogue {
     public DialogueData data;
     
     private int pageIndex;
-    public PageData currentPage;
+    public InfoPageData currentPage;
 
     public bool reachedEnd;
 
@@ -101,7 +140,7 @@ public class Dialogue {
         this.data = data;
     }
 
-    public PageData Begin() {
+    public InfoPageData Begin() {
         if (data.pages.Count <= 0) {
             Debug.LogError("There are no pages in this dialogue");
             return null;
@@ -112,7 +151,7 @@ public class Dialogue {
         return currentPage;
     }
 
-    public PageData NextPage() {
+    public InfoPageData NextPage() {
         pageIndex++;
         if (pageIndex >= data.pages.Count) {
             Debug.Log("Reached the end of dialogue, '" + data.id + "'");

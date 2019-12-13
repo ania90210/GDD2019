@@ -9,33 +9,24 @@ public class DialogueData : ScriptableObject {
 
     public string id;
 
-    public List<PageData> pages;
-
-}
-
-public enum PageType {
-    Info, Question 
-}
-
-[System.Serializable]
-public class PageData {
-    public PageType pageType;
-
-    public InfoPage infoPage;
-    public QuestionPage questionPage;
+    public List<InfoPageData> pages;
 
 }
 
 [System.Serializable]
-public class InfoPage : PageData {
+public class InfoPageData {
+    public string id;
     public string header;
     public string body;
 }
 
-[System.Serializable]
-public class QuestionPage : PageData {
-    public string header;
-    public string body;
-    public List<string> option;
 
-}
+// Maybe I'll reuse this code to support questions later. Right now it is not necessary.
+
+// [System.Serializable]
+// public class QuestionPage : PageData {
+//     public string header;
+//     public string body;
+//     public List<string> option;
+
+// }
