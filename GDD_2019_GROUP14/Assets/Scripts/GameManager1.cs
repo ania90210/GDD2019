@@ -11,6 +11,8 @@ public class GameManager1 : MonoBehaviour
 	public PlayerStorage storage;
 	public GameObject artifactPrefab;
 	[HideInInspector] public GameObject artifact;
+	public GameObject timelinePrefab;
+	[HideInInspector] GameObject timeline;
 	public TrashBin trashBinPrefab;
 	[HideInInspector] public TrashBin trashBin;
 
@@ -45,7 +47,7 @@ public class GameManager1 : MonoBehaviour
 		trashBin = boardScript.PlaceObjectRandom(trashBinPrefab.gameObject).GetComponent<TrashBin>();
 		trashBin.OnFilled.AddListener(delegate {
 			artifact.SetActive(true);
-			DialogueSystem.instance.BeginDialogue("clock_tower");
+			timeline = Instantiate(timelinePrefab);
 		});
 		trashBin.OnReceivedTrash.AddListener(delegate {
 			view.trashCountText.text = trashBin.currentAmt.ToString();
