@@ -44,6 +44,7 @@ public class PlayerCollector : MonoBehaviour {
             Debug.Log("Reached trash!");
             stateMachine.ChangeState(new WaitForInput("Collect", true, inputBtn, delegate {
                 CollectTrash(collider.gameObject);
+                SoundManager.PlaySound(SoundManager.Sound.TrashPickedUp);
             }));
         }
 

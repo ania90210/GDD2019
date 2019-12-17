@@ -11,8 +11,6 @@ public class GameManager1 : MonoBehaviour
 	public PlayerStorage storage;
 	public GameObject artifactPrefab;
 	[HideInInspector] public GameObject artifact;
-	public GameObject timelinePrefab;
-	[HideInInspector] GameObject timeline;
 	public TrashBin trashBinPrefab;
 	[HideInInspector] public TrashBin trashBin;
 
@@ -25,11 +23,13 @@ public class GameManager1 : MonoBehaviour
 	void Awake () {
 		if (instance == null) 
 			instance = this;
-		else if (instance != this)
+		else if (instance != this) {
 			Destroy (gameObject);
+			return;
+		}
 
         //Sets this to not be destroyed when reloading scene
-		DontDestroyOnLoad (gameObject);
+		//DontDestroyOnLoad (gameObject);
 
 		// Get a reference to the board and set it up
 		boardScript = GetComponent<BoardManager>();
@@ -45,10 +45,13 @@ public class GameManager1 : MonoBehaviour
 
 		// Place the trashbin somewhere on the board
 		trashBin = boardScript.PlaceObjectRandom(trashBinPrefab.gameObject).GetComponent<TrashBin>();
+
+		// When the trash bin is filled, do these actions
 		trashBin.OnFilled.AddListener(delegate {
 			artifact.SetActive(true);
-			timeline = Instantiate(timelinePrefab);
 		});
+
+		// When trash is thrown away, do these actions
 		trashBin.OnReceivedTrash.AddListener(delegate {
 			view.trashCountText.text = trashBin.currentAmt.ToString();
 		});

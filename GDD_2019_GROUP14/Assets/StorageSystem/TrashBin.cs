@@ -24,22 +24,67 @@ public class TrashBin : MonoBehaviour
     /// Whether the OnFilled event was called yet or not
     /// </summary>
     private bool isDone_OnFilled;
+
+    public StateMachine stateMachine;
+    public CustomState level0_state;
+    public CustomState level1_state;
+    public CustomState level2_state;
     
 
     void Start() {
-        OnReceivedTrash.AddListener(UpdateIndicatorLights);
+        OnReceivedTrash.AddListener(UpgradeTrashBin);
 
-        UpdateIndicatorLights();
+        // Throughout its lifetime, the trashbin will go through 3 states
+        // Each state has an Enter (which triggers when first entering the state),
+        //   an Execute (which triggers at every frame update)
+        //   and an Exit (which triggeres when leaving the state)
+        // Delegates are used to write functions within functions
+        level0_state = new CustomState("Level0", true,
+            // enter callback
+            delegate {
+                capacityIndicator.color = Color.red;
+            },
+            // execute callback
+            null,
+            // exit callback
+            null
+        );
+
+        level1_state = new CustomState("Level1", true,
+            delegate {
+                capacityIndicator.color = Color.yellow;
+                SoundManager.PlaySound(SoundManager.Sound.TrashUpgrade1);
+            },
+            null,
+            null
+        );
+
+        level2_state = new CustomState("Level2", true,
+            delegate {
+                capacityIndicator.color = Color.green;
+                SoundManager.PlaySound(SoundManager.Sound.TrashUpdrage2);
+            },
+            null,
+            null
+        );
+
+        // At the start, the trash bin is at level0
+        stateMachine = gameObject.AddComponent<StateMachine>();
+        stateMachine.ChangeState(level0_state);
     }
 
-    public void UpdateIndicatorLights() {
-        if (currentAmt == 0) {
-            capacityIndicator.color = Color.red;
+    void Update() {
+        stateMachine.ExecuteStateUpdate();
+    }
+
+    public void UpgradeTrashBin() {
+        if (currentAmt <= 0) {
+            stateMachine.ChangeState(level0_state);
         }
         else if (currentAmt >= maxAmt) {
-            capacityIndicator.color = Color.green;
+            stateMachine.ChangeState(level2_state);
         } else {
-            capacityIndicator.color = Color.yellow;
+            stateMachine.ChangeState(level1_state);
         }
     }
 
