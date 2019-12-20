@@ -18,11 +18,13 @@ public static class SoundManager
         TrashUpdrage2
     }
 
-    public static void PlaySound(Sound sound) {
+    public static void PlaySound(Sound sound, float timer = 1.0f) {
         GameObject soundGameObject = new GameObject("sound");
         AudioSource audiosource = soundGameObject.AddComponent<AudioSource>();
-        
-        audiosource.PlayOneShot(GetAudioClip(sound));
+        SelfDestruction selfDestruction = soundGameObject.AddComponent<SelfDestruction>();
+        selfDestruction.SelfDestroyIn(timer);
+
+        audiosource.PlayOneShot(GetAudioClip(sound));  
     }
 
     public static AudioClip GetAudioClip(Sound sound) {

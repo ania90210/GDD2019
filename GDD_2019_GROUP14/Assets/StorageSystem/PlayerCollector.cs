@@ -23,6 +23,8 @@ public class PlayerCollector : MonoBehaviour {
         }
 
         GameManager1.instance.storage.trashCollected += 1;
+        GameManager1.instance.view.trashCountText.text = (GameManager1.instance.storage.trashCollected + GameManager1.instance.trashBin.currentAmt).ToString();
+        
         Destroy(trash);
     }
 

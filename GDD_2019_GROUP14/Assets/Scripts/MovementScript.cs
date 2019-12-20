@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementScript : MonoBehaviour
 {
     // speed
-    public int speed = 8;
+    public float speed = 8;
     public Vector3 orientation;
     // Start is called before the first frame update
     void Start()

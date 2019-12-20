@@ -51,11 +51,6 @@ public class GameManager1 : MonoBehaviour
 			artifact.SetActive(true);
 		});
 
-		// When trash is thrown away, do these actions
-		trashBin.OnReceivedTrash.AddListener(delegate {
-			view.trashCountText.text = trashBin.currentAmt.ToString();
-		});
-
 		// Place the artifact somewhere on the board
 		artifact = boardScript.PlaceObjectRandom(artifactPrefab.gameObject);
 		// At the start, the artifact is invisble to the player
