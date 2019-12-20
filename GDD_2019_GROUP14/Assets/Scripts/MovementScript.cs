@@ -5,15 +5,10 @@ using UnityEngine;
 public class MovementScript : MonoBehaviour
 {
     // speed
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    public float speed = 8;
-=======
+
+
     public int speed = 6;
->>>>>>> Stashed changes
-=======
-    public int speed = 6;
->>>>>>> Stashed changes
+
     public Vector3 orientation;
     // Start is called before the first frame update
     void Start()
