@@ -87,6 +87,8 @@ public class UnitScript : MonoBehaviour
 
     IEnumerator FollowPath()
     {
+
+        Debug.Log(path.Length);
         if (path.Length > 0)
         {
             Vector3 currentWaypoint = path[0];

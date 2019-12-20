@@ -113,8 +113,8 @@ public class FlashLight : MonoBehaviour
             recoveryMode = false;
         }
 
-        Debug.Log("recovery mode: " + recoveryMode);
-        Debug.Log("battery mode: " + battery);
+        //Debug.Log("flashlight in recovery mode: " + recoveryMode);
+        //Debug.Log("battery mode: " + battery);
 
         //slider.value = BatteryPercent();
     }
