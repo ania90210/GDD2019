@@ -5,6 +5,7 @@ using UnityEngine;
 public class UnitScript : MonoBehaviour
 {
 
+    const float distance2player2 = 65;
     const float pathUpdateMoveThreshold = 0.3f;
     const float minUpdateTime = 0.2f;
     public Transform target;
@@ -13,12 +14,41 @@ public class UnitScript : MonoBehaviour
     Vector3[] path;
     int targetIndex;
 
+
+    // light
+    public UnityEngine.Experimental.Rendering.LWRP.Light2D light;
+
     // Start is called before the first frame update
     void Start()
     {
         //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-        StartCoroutine(UpdatePath());
+        //StartCoroutine(UpdatePath());
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        light.enabled = false;
+        StartCoroutine(DoCheck());
+
     }
+
+
+    bool PlayerClose()
+    {
+        return (target.transform.position - this.transform.position).sqrMagnitude < distance2player2;
+    }
+
+    IEnumerator DoCheck()
+    {
+        for (; ; )
+        {
+            if (PlayerClose() && !searching)
+            {
+                this.searching = true;
+                light.enabled = true;
+                StartCoroutine(UpdatePath());
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccess)
     {
@@ -46,26 +76,26 @@ public class UnitScript : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(minUpdateTime);
-            if((target.position - targetPosOld).sqrMagnitude > sqMoveThreshold)
+            if ((target.position - targetPosOld).sqrMagnitude > sqMoveThreshold)
             {
                 PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
                 targetPosOld = target.position;
             }
-            
+
         }
     }
 
     IEnumerator FollowPath()
     {
-        if(path.Length > 0)
+        if (path.Length > 0)
         {
             Vector3 currentWaypoint = path[0];
             while (true)
             {
-                if(transform.position == currentWaypoint)
+                if (transform.position == currentWaypoint)
                 {
                     targetIndex++;
-                    if(targetIndex >= path.Length)
+                    if (targetIndex >= path.Length)
                     {
                         yield break;
                     }

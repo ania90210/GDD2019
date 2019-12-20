@@ -6,11 +6,11 @@ public class MovementScript : MonoBehaviour
 {
     // speed
     public int speed = 8;
-
+    public Vector3 orientation;
     // Start is called before the first frame update
     void Start()
     {
-          
+        this.orientation = Vector3.right; // start facing right
     }
 
     // Update is called once per frame
@@ -20,20 +20,26 @@ public class MovementScript : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             movement[0] = -1f;
+            this.orientation = movement;
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             movement[0] = 1f;
+            this.orientation = movement;
         }
         else if (Input.GetKey(KeyCode.UpArrow))
         {
             movement[1] = 1f;
+            this.orientation = movement;
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
             movement[1] = -1f;
+            this.orientation = movement;
+
         }
-        this.transform.Translate(movement*Time.deltaTime*speed);
+        //this.orientation = movement; don t do this here, or will always update to 0 0 0 
+        this.transform.Translate(movement * Time.deltaTime * speed);
 
     }
 

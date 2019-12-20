@@ -10,12 +10,12 @@ public class GridScript : MonoBehaviour
     // x axis
     // y axis
     public Transform player;
-    public int gridXsize=100, gridYsize=50;
+    public int gridXsize = 100, gridYsize = 50;
     // its a square grid
-    public float cellSize=1;
+    public float cellSize = 1f;
     Node[,] gridCells;
 
-    private Vector3 lowerLeft; 
+    private Vector3 lowerLeft;
     // Start is called before the first frame update
     void Awake()
     {
@@ -27,13 +27,19 @@ public class GridScript : MonoBehaviour
     void createGrid()
     {
 
-        for (int x = 0; x < Mathf.RoundToInt(gridXsize/cellSize); x++)
+        for (int x = 0; x < Mathf.RoundToInt(gridXsize / cellSize); x++)
         {
-            for(int y = 0; y < Mathf.RoundToInt(gridYsize/cellSize); y++)
+            for (int y = 0; y < Mathf.RoundToInt(gridYsize / cellSize); y++)
             {
                 Vector3 worldPoint = FromGridToWorld(x, y);
-                //bool obstacle = Physics.CheckBox(worldPoint, Vector3.one * this.cellSize / 2);
-                bool obstacle = Physics.CheckSphere(worldPoint, this.cellSize/2);
+
+                //bool obstacle = Physics.CheckSphere(worldPoint, this.cellSize/2);
+                Collider2D hit = Physics2D.OverlapPoint(worldPoint);
+                bool obstacle = hit != null;
+                if (obstacle)
+                {
+                    obstacle = hit.gameObject.tag == "Obstacle";
+                }
                 this.gridCells[x, y] = new Node(obstacle, worldPoint, x, y);
 
                 FromWorldToGrid(worldPoint);
@@ -61,9 +67,9 @@ public class GridScript : MonoBehaviour
     {
         List<Node> children = new List<Node>();
         // col
-        for(int j = -1; j <= 1; j++)
+        for (int j = -1; j <= 1; j++)
         {
-            if(OkChild(n.x, n.y + j) && j != 0)
+            if (OkChild(n.x, n.y + j) && j != 0)
             {
                 children.Add(gridCells[n.x, n.y + j]);
             }
@@ -89,11 +95,11 @@ public class GridScript : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(this.transform.position, new Vector3(this.gridXsize, this.gridYsize, 0));
-        if(this.gridCells != null)
+        if (this.gridCells != null)
         {
             int i = 0;
             Node playerNode = FromWorldToGrid(player.position);
-            foreach(Node n in this.gridCells)
+            foreach (Node n in this.gridCells)
             {
 
                 Gizmos.color = n.obstacle ? Color.red : Color.white;
@@ -101,7 +107,7 @@ public class GridScript : MonoBehaviour
                 {
                     Gizmos.color = Color.cyan;
                 }
-                Gizmos.DrawCube(n.position, Vector3.one * (this.cellSize-0.01f));
+                Gizmos.DrawCube(n.position, Vector3.one * (this.cellSize - 0.01f));
                 i++;
             }
         }
