@@ -20,11 +20,12 @@ public class FlashLight : MonoBehaviour
 
 
     // get UI
-    public Slider slider;
-
+    public Transform batteryUI;
+    Color batteryColor;
     // flash light reload, time it can stay on, seconds
-    public float maxBattery = 2.0f;
-    public float reduceRecover = 3.0f; // by how much you reduce the recovery
+    public float maxBattery = 1.0f;
+    public float reduceRecover = 2.0f; // by how much you reduce the recovery
+    float dangerZone;
     float battery;
     bool recoveryMode = false;
 
@@ -43,8 +44,11 @@ public class FlashLight : MonoBehaviour
 
         // set battery to amx battery
         battery = maxBattery;
-
+        dangerZone = maxBattery * 0.3f;
+        batteryUI = batteryUI.Find("Bar");
+        batteryColor = batteryUI.Find("BarSprite").GetComponent<SpriteRenderer>().color;
         SetUpRotation();
+        StartCoroutine(changeColorBattery());
     }
 
     void SetUpRotation()
@@ -97,7 +101,7 @@ public class FlashLight : MonoBehaviour
         }
 
         // if flashlight turned off -> increase battery level
-        if (!flashLight.enabled && battery < maxBattery)
+        if (recoveryMode)
         {
             battery += Time.deltaTime / reduceRecover;
         }
@@ -107,22 +111,35 @@ public class FlashLight : MonoBehaviour
             flashLight.enabled = false;
             recoveryMode = true;
         }
-        
-        if(battery >= maxBattery)
+
+        if (battery >= maxBattery)
         {
             recoveryMode = false;
         }
-
-        //Debug.Log("flashlight in recovery mode: " + recoveryMode);
-        //Debug.Log("battery mode: " + battery);
-
-        //slider.value = BatteryPercent();
+        batteryUI.localScale = new Vector3(BatteryPercent(), 1, 1);
     }
 
     float BatteryPercent()
     {
         float progress = Mathf.Clamp01(battery / maxBattery);
         return progress;
+    }
+
+    IEnumerator changeColorBattery()
+    {
+        for (; ; )
+        {
+            if (battery <= dangerZone && !recoveryMode)
+            {
+                batteryUI.Find("BarSprite").GetComponent<SpriteRenderer>().color =
+                    batteryColor == batteryUI.Find("BarSprite").GetComponent<SpriteRenderer>().color ? Color.white : batteryColor;
+            }
+            if (recoveryMode)
+            {
+                batteryUI.Find("BarSprite").GetComponent<SpriteRenderer>().color = batteryColor;
+            }
+            yield return new WaitForSeconds(0.22f);
+        }
     }
 
 

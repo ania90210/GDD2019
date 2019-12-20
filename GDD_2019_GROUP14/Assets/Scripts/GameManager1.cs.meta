@@ -3,7 +3,13 @@ guid: 7182070ba05923643b26c6fc1e9b5ebc
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - boardScript: {instanceID: 0}
+  - artifactPrefab: {fileID: 5720525171334718280, guid: 385b65ca3ac3f69408b2b565fb04d2f6,
+      type: 3}
+  - artifact: {instanceID: 0}
+  - trashBinPrefab: {instanceID: 0}
+  - trashBin: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
