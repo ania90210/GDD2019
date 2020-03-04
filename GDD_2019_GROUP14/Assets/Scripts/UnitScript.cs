@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class UnitScript : MonoBehaviour
 {
 
@@ -115,6 +115,7 @@ public class UnitScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            SceneManager.LoadScene(1);
             Destroy(collision.gameObject);
         }
     }

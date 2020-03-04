@@ -30,7 +30,7 @@ public class PlayerCollector : MonoBehaviour {
 
     void Awake() {
         stateMachine = gameObject.AddComponent<StateMachine>();
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     void Update() {
