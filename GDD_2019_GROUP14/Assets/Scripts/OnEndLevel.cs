@@ -24,7 +24,7 @@ public class OnEndLevel : MonoBehaviour
     public void ContinueLevel()
     {
         // goes on, for now restarts level
-        this.RestartLevel();
+        RestartLevel();
     }
 
     public void ExitGame()
@@ -34,15 +34,5 @@ public class OnEndLevel : MonoBehaviour
         Application.Quit(0);
     }
 
-
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
 
 }

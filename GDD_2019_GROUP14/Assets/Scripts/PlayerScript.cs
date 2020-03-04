@@ -4,10 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
+    
+    private void Awake()
+    {
+        Debug.Log("Awake");
+        Debug.Log(this.name);
+
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        Debug.Log("START");
+        Debug.Log(this.name);
     }
 
     // Update is called once per frame
