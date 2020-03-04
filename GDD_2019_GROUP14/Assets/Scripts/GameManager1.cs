@@ -28,9 +28,6 @@ public class GameManager1 : MonoBehaviour
 			return;
 		}
 
-        //Sets this to not be destroyed when reloading scene
-		//DontDestroyOnLoad (gameObject);
-
 		// Get a reference to the board and set it up
 		boardScript = GetComponent<BoardManager>();
 		InitGame (); 

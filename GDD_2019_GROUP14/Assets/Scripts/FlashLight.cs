@@ -45,7 +45,7 @@ public class FlashLight : MonoBehaviour
         // set battery to amx battery
         battery = maxBattery;
         dangerZone = maxBattery * 0.3f;
-        batteryUI = batteryUI.Find("Bar");
+        batteryUI = GameObject.Find("Bar").transform;
         batteryColor = batteryUI.Find("BarSprite").GetComponent<SpriteRenderer>().color;
         SetUpRotation();
         StartCoroutine(changeColorBattery());

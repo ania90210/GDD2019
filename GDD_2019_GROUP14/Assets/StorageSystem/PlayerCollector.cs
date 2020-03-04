@@ -30,12 +30,10 @@ public class PlayerCollector : MonoBehaviour {
 
     void Awake() {
         stateMachine = gameObject.AddComponent<StateMachine>();
-        DontDestroyOnLoad(this.gameObject);
     }
 
     void Update() {
         stateMachine.ExecuteStateUpdate();
-
     }
 
     void OnTriggerEnter2D(Collider2D collider)

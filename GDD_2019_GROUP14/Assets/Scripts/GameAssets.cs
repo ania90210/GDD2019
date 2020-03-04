@@ -16,7 +16,7 @@ public class GameAssets : MonoBehaviour
     void Awake() {
         if (_instance == null) _instance = this;
 
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
 
     [System.Serializable]
