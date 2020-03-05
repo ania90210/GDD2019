@@ -115,7 +115,7 @@ public class UnitScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(5);
             Destroy(collision.gameObject);
         }
     }

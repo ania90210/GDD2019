@@ -32,7 +32,7 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("EXIT");
             Destroy(this);
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(5);
             // you reached the end of the level, run the end level scene with positive message, You successfully completed the level
         }
     }
@@ -40,7 +40,8 @@ public class PlayerScript : MonoBehaviour
     private void OnDestroy()
     {
         Debug.Log("DEATH");
-        
+        PlayerPrefs.SetInt(GameUtility.SavePrefKeyGameScore, GameManager1.instance.storage.artifacts.Count * 5 +
+            GameManager1.instance.storage.trashCollected);
         //SceneManager.LoadScene(1); // this should be moved to some manager
         // you were killed
         // run end level scene with a "negative" message, like, You've been killed
