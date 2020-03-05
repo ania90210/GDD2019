@@ -6,4 +6,5 @@ public class GameUtility
 {
     public const float resolutionDelay = 1.5f;
     public const string SavePrefKey = "GameHighscoreValue";
+    public const string SavePrefKeyGameScore = "GameScoreValue";
 }

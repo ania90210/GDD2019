@@ -37,7 +37,8 @@ public class QuizManager : MonoBehaviour
 
     private void Awake()
     {
-        events.CurrentFinalScore = 0;
+        //events.CurrentFinalScore = 0;
+        events.CurrentFinalScore = PlayerPrefs.GetInt(GameUtility.SavePrefKeyGameScore);
     }
 
     void Start()
