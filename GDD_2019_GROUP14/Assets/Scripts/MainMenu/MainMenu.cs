@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         // Pilot scene is indexed at 0
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Pilot");
     }
 
     public void ExitGame()
@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadQuizFromInterScene()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene("QuizScene");
     }
 
 }

@@ -115,6 +115,7 @@ public class UnitScript : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             Destroy(collision.gameObject);
+            SceneManager.LoadScene("InterGameQuizScene", LoadSceneMode.Single);
         }
     }
 

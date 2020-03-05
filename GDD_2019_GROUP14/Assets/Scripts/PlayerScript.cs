@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
-    
+
+    private static int lastLevel = 7;
+    public static int lvlId;
+    private int score;
+
     private void Awake()
     {
+        score = PlayerPrefs.GetInt(GameUtility.SavePrefKeyGameScore);
         Debug.Log("Awake");
         Debug.Log(this.name);
 
@@ -17,6 +22,7 @@ public class PlayerScript : MonoBehaviour
 
         Debug.Log("START");
         Debug.Log(this.name);
+        lvlId = SceneManager.GetActiveScene().buildIndex;
     }
 
     // Update is called once per frame
@@ -28,18 +34,27 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Exit")
+        Debug.Log("LEVEL ID " + lvlId);
+        if(collision.gameObject.tag == "Exit" && lvlId != lastLevel)
         {
-            Debug.Log("EXIT");
-            SceneManager.LoadScene("Name", LoadSceneMode.Single);
+            Debug.Log("EXIT to new level");
+            //SceneManager.LoadScene("InterGameQuizScene", LoadSceneMode.Single);
+            SceneManager.LoadScene(lvlId+1, LoadSceneMode.Single);
             // you reached the end of the level, run the end level scene with positive message, You successfully completed the level
+        }else if (collision.gameObject.tag == "Exit" && lvlId == lastLevel)
+        {
+            Debug.Log("EXIT TO QUIZ");
+            SceneManager.LoadScene("InterGameQuizScene", LoadSceneMode.Single);
         }
     }
 
     private void OnDestroy()
     {
+        score += GameManager1.instance.storage.artifacts.Count * 5 + GameManager1.instance.storage.trashCollected;
+        PlayerPrefs.SetInt(GameUtility.SavePrefKeyGameScore, score);
+        Debug.Log("current score: " + score);
         Debug.Log("DEATH");
-        SceneManager.LoadScene("Name", LoadSceneMode.Single); // this should be moved to some manager
+        //SceneManager.LoadScene("InterGameQuizScene", LoadSceneMode.Single); // this should be moved to some manager
         // you were killed
         // run end level scene with a "negative" message, like, You've been killed
     }

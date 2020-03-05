@@ -276,7 +276,7 @@ public class QuizManager : MonoBehaviour
     public void RestartGame()
     {
         // this button is actually for the MENU button to go to the MENU ! customize it!
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("MainMenu");
     }
 
     // this is for quitting
