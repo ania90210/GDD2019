@@ -35,6 +35,8 @@ public class GridScript : MonoBehaviour
 
                 //bool obstacle = Physics.CheckSphere(worldPoint, this.cellSize/2);
                 Collider2D hit = Physics2D.OverlapPoint(worldPoint);
+                
+           
                 bool obstacle = hit != null;
                 if (obstacle)
                 {
