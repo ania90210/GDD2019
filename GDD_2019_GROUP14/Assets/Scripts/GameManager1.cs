@@ -45,9 +45,9 @@ public class GameManager1 : MonoBehaviour
         artefactPickedUp = 0;
         // Place the trashbin somewhere on the board
         trashBin = boardScript.PlaceObjectRandom(trashBinPrefab.gameObject).GetComponent<TrashBin>();
-
-		// When the trash bin is filled, do these actions
-		trashBin.OnFilled.AddListener(delegate {
+        
+        // When the trash bin is filled, do these actions
+        trashBin.OnFilled.AddListener(delegate {
 			artifact.SetActive(true);
             artefactPickedUp = 1;
 
