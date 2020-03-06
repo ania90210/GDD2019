@@ -14,6 +14,8 @@ public class GameManager1 : MonoBehaviour
 	public TrashBin trashBinPrefab;
 	[HideInInspector] public TrashBin trashBin;
 
+    public int artefactPickedUp = 0;
+
 	public GameManagerView view;
 	
 	private int level = 3;
@@ -39,14 +41,17 @@ public class GameManager1 : MonoBehaviour
     //Initializes the game for each level
 	void InitGame() {
 		boardScript.SetupScene(level);
-
-		// Place the trashbin somewhere on the board
-		trashBin = boardScript.PlaceObjectRandom(trashBinPrefab.gameObject).GetComponent<TrashBin>();
+        Debug.Log("HELLO GAME MANAGER");
+        artefactPickedUp = 0;
+        // Place the trashbin somewhere on the board
+        trashBin = boardScript.PlaceObjectRandom(trashBinPrefab.gameObject).GetComponent<TrashBin>();
 
 		// When the trash bin is filled, do these actions
 		trashBin.OnFilled.AddListener(delegate {
 			artifact.SetActive(true);
-		});
+            artefactPickedUp = 1;
+
+        });
 
 		// Place the artifact somewhere on the board
 		artifact = boardScript.PlaceObjectRandom(artifactPrefab.gameObject);

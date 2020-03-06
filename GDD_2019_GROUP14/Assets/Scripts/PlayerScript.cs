@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
 
-    private static int lastLevel = 7;
+    private static int lastLevel = 18;
     public static int lvlId;
     private int score;
 
     private void Awake()
     {
-        score = PlayerPrefs.GetInt(GameUtility.SavePrefKeyGameScore);
+        score = SceneManager.GetActiveScene().buildIndex == 2 ? 0 : PlayerPrefs.GetInt(GameUtility.SavePrefKeyGameScore);
         Debug.Log("Awake");
         Debug.Log(this.name);
 
@@ -28,7 +28,9 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log(GameManager1.instance.storage.artifacts.Count);
+        //Debug.Log("trash, " + GameManager1.instance.storage.trashCollected);
+        //Debug.Log(GameManager1.instance.artefactPickedUp);
     }
 
 
@@ -50,7 +52,8 @@ public class PlayerScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        score += GameManager1.instance.storage.artifacts.Count * 5 + GameManager1.instance.storage.trashCollected;
+        Debug.Log(GameManager1.instance.artefactPickedUp);
+        score += GameManager1.instance.artefactPickedUp * 5 + GameManager1.instance.storage.trashCollected;
         PlayerPrefs.SetInt(GameUtility.SavePrefKeyGameScore, score);
         Debug.Log("current score: " + score);
         Debug.Log("DEATH");
