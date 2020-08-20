@@ -1,1 +1,2 @@
-# GDD2019
+# Viator
+A platformer/quiz game where the player explores a land in ruins, collecting artifacts and fighting enemies along the way. Each artifact symbolizes a part of Graz and tells a brief history of it, and the player will later be quizzed on what they have learned. Throughout the land, there may also be things that are bad for the environment and the player can clean up (e.g. leaky faucets, rubbish, etc.). The player can choose to fix these things along the way, thus earning them more points.
